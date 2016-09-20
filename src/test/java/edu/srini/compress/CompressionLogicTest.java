@@ -4,9 +4,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+@SuppressWarnings("unused")
 public class CompressionLogicTest {
 
 	CompressionLogic cp;
+
 	private static final String SEED_1_LINE_1 = "1";
 	private static final String SEED_1_LINE_2 = "1 1";
 	private static final String SEED_1_LINE_3 = "2 1";
