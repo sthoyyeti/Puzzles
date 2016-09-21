@@ -73,7 +73,7 @@ public class CostOfTravelV2 {
 		for (int i = 1; i <= count; i++) {
 			days.remove(start);
 		}
-		return count > 3 ? 7 : 2 * count;
+		return 7;
 	}
 
 }
