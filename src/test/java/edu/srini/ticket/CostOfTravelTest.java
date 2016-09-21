@@ -7,6 +7,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.srini.ticket.CostOfTravelV2.Cost;
+
 
 
 public class CostOfTravelTest {
@@ -17,16 +19,17 @@ public class CostOfTravelTest {
 		CASE2(Arrays.asList(1), 2),
 		CASE3(Arrays.asList(1,7,13,19,25,30), 12),
 		CASE4(Arrays.asList(1,7,8,10,12,19,25,30), 15), 
-		CASE5(Arrays.asList(1,3,5,7,9,11,13,15,17,19,21,23,25,27,29), 23),
+		CASE5(Arrays.asList(1,3,5,7,9,11,13,15,17,19,21,23,25,27,29), Cost.MONTH.value()),
 		CASE6(Arrays.asList(1,3,6,9,12,15,18,21,24,27,30), 22),
 		CASE7(Arrays.asList(1,4,8,12,16,20,24,28), 16),
 		CASE8(Arrays.asList(1,5,10,15,20,25,30), 14),
 		CASE9(Arrays.asList(1,2,3,4,5,6,7,15,16,17,18,25,26,27,28,29), 21),
 		CASE10(Arrays.asList(1,2,3,4,5,6,7,11,15,16,17,18,25,26,27,28,29), 23),
-		CASE11(Arrays.asList(1,2,3,4,5,6,7,11,12,15,16,17,18,25,26,27,28,29), 23);
+		CASE11(Arrays.asList(1,2,3,4,5,6,7,11,12,15,16,17,18,19,25,26,27,28,29), Cost.MONTH.value()),
+		CASE12(Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23), Cost.MONTH.value());
 		
-		List<Integer> days;
-		int cost;
+		final List<Integer> days;
+		final int cost;
 		
 		TravelCost(List<Integer> days, int cost){
 			this.days = days;
@@ -68,6 +71,7 @@ public class CostOfTravelTest {
 	@Test
 	public void testTravelForAllOddDays(){
 		int calculateCost = cot.calculateMonthlyTicketCost(TravelCost.CASE5.getDays());
+		System.out.println("returned cost:"+ calculateCost);
 		Assert.assertEquals(TravelCost.CASE5.getCost(), calculateCost);
 	}
 	@Test
@@ -100,4 +104,10 @@ public class CostOfTravelTest {
 		int calculateCost = cot.calculateMonthlyTicketCost(TravelCost.CASE11.getDays());
 		Assert.assertEquals(TravelCost.CASE11.getCost(), calculateCost);
 	}
+	@Test
+	public void testTravelForStraight23Days(){
+		int calculateCost = cot.calculateMonthlyTicketCost(TravelCost.CASE12.getDays());
+		Assert.assertEquals(TravelCost.CASE12.getCost(), calculateCost);
+	}
+
 }

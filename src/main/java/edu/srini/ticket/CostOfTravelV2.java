@@ -18,7 +18,18 @@ import java.util.List;
  */
 public class CostOfTravelV2 {
 	List<Integer> daysInSequence;
+	static enum Cost { DAY(2), WEEK(7), MONTH(25);
+		int cost;
+		Cost(int cost){
+			this.cost = cost;
+		}
+		public int value(){
+			return cost;
+		}
+	}
+	
 	public static void main(String[] args) {
+		
 
 		List<Integer> days = new LinkedList<Integer>();
 		//days.addAll(Arrays.asList(1, 2, 3, 5, 6, 7, 11, 15, 17));
@@ -26,14 +37,16 @@ public class CostOfTravelV2 {
 		//days.addAll(Arrays.asList(1,7,8,10,12,19,25,30));
 		// days.addAll(Arrays.asList(1, 2, 3, 5, 6, 7, 8,9,10,11,12,13,14, 15,
 		// 17, 19, 23, 27, 29, 30)); 
-		days.addAll(Arrays.asList(1,3,6,9,12,15,18,21,24,27,30));
+		//days.addAll(Arrays.asList(1,3,6,9,12,15,18,21,24,27,30)); 1,3,5,7,9,11,13,15,17,19,21,23,25,27,29
+		days.addAll(Arrays.asList(1,3,5,7,9,11,13,15,17,19,21,23,25,27,29));
 		System.out.println(new CostOfTravelV2().calculateMonthlyTicketCost(days));
 	}
 
 	public int calculateMonthlyTicketCost(List<Integer> days) {
 		daysInSequence = new ArrayList<>(days.size());
-		int cost = calculateCostFor(new LinkedList<Integer>(days));
-		return cost > 23 ? 23 : cost;
+		// if day are 23. then 21 + 2 is best case for which cost is 7 * 3 + 2 * 2 = 25.
+		int cost = (days.size() < 23)? calculateCostFor(new LinkedList<Integer>(days)) : Cost.MONTH.value();
+		return cost >= Cost.MONTH.value() ? Cost.MONTH.value() : cost;
 	}
 
 	private int calculateCostFor(List<Integer> days) {
