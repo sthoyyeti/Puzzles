@@ -1,12 +1,13 @@
 ##This game starts with entering the Width x Height of board in which a Horse starting at B should read E and the minimum number of turns required to reach has to be displayed or impossible to move horse to E.
-
+<pre>
 Example:
 Input:
 5 5
+
 ....E
 .....
 .....
 .....
 B....
 
-Output: 4 
+Output: 4</pre>
