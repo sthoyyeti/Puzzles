@@ -2,6 +2,9 @@ package edu.srini.compress;
 
 import java.util.Scanner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /*
  * 1
  * 1 1
@@ -14,13 +17,14 @@ import java.util.Scanner;
  * 3 1 1 3 1 2 1 1 1 3 1 2 2 1
  */
 public class CompressionLogic {
+	private static Logger logger = LoggerFactory.getLogger(CompressionLogic.class);
 
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		int seed = scanner.nextInt();
 		int line = scanner.nextInt();
 		scanner.close();
-		System.out.println(new CompressionLogic().getNthCompressedLine(seed, line));
+		logger.info(new CompressionLogic().getNthCompressedLine(seed, line));
 	}
 
 	public String getNthCompressedLine(int seed, int line) {
@@ -28,9 +32,9 @@ public class CompressionLogic {
 	}
 
 	private boolean isValidInput(int seed, int line) {
-		System.out.printf("seed = %d, line=%d\n", seed, line);
+		logger.debug("seed = {}, line={}\n", seed, line);
 		if ((seed < 0 || seed >= 100) || (line < 0 || line > 25)) {
-			System.out.println("Invalid input... 0 < seed < 100 and 0 < line <= 25");
+			logger.info("Invalid input... 0 < seed < 100 and 0 < line <= 25");
 			throw new IllegalArgumentException("Invalid input... Expecting: 0 < seed < 100 and 0 < line <= 25");
 		}
 		return true;

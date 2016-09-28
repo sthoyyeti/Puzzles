@@ -3,19 +3,24 @@ package edu.srini.chess;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class HorseJourneyFromB2E {
-	static final char DOT = '.';
-	static final char TAKEN = '#';
-	static char[][] m;
-	static int W;
-	static int H;
-	static int moveCount = 0;
-	static boolean moveMade = false;
-	static Position bp = null;
-	static MovementPossibility openSteps;
-	static Position ePos = null;
-	static LinkedList<Position> trackB = new LinkedList<Position>();
+	private static Logger logger = LoggerFactory.getLogger(HorseJourneyFromB2E.class);
+	private static final char CHAR_E = 'E';
+	private static final char CHAR_B = 'B';
+	private static final char DOT = '.';
+	private static final char TAKEN = '#';
+	private static char[][] m;
+	private static int W;
+	private static int H;
+	private static int moveCount = 0;
+	private static boolean moveMade = false;
+	private static Position bp = null;
+	private static MovementPossibility openSteps;
+	private static Position ePos = null;
+	private static LinkedList<Position> trackB = new LinkedList<Position>();
 	private static Scanner scanner;;
 
 	enum DIR {
@@ -37,14 +42,14 @@ public class HorseJourneyFromB2E {
 
 		}
 		printMatrix();
-		System.out.println();
+		logger.info("\n");
 
-		bp = getPosition('B');
+		bp = getPosition(CHAR_B);
 		trackB.add(new Position(bp));
-		ePos = getPosition('E');
+		ePos = getPosition(CHAR_E);
 
-		System.out.println("'B' Position --> " + bp);
-		System.out.println("'E' Position --> " + ePos);
+		logger.info("'B' Position --> " + bp);
+		logger.info("'E' Position --> " + ePos);
 
 		executeB2EMovement(ePos);
 
@@ -58,7 +63,7 @@ public class HorseJourneyFromB2E {
 
 			fillNextMoves();
 
-			System.out.println(openSteps);
+			logger.info(openSteps.toString());
 
 			if (openSteps.isMovementPossible()) {
 
@@ -100,7 +105,7 @@ public class HorseJourneyFromB2E {
 			if (!moveMade) // this can also be B blocked or can not proceed
 			// towards E
 			{
-				System.out.println("No movement possible...quitting!!!");
+				logger.info("No movement possible...quitting!!!");
 				System.exit(1);
 			} else {
 
@@ -280,7 +285,7 @@ public class HorseJourneyFromB2E {
 		int y = posNW.getY();
 		// Success case
 		if (m[x][y] == 'E') {
-			System.out.println("No of steps: " + moveCount);
+			logger.info("No of steps: " + moveCount);
 			System.exit(0);
 		}
 
@@ -364,12 +369,13 @@ public class HorseJourneyFromB2E {
 	}
 
 	private static void printMatrix() {
+		StringBuffer sb = new StringBuffer();
 		for (int i = 0; i < H; i++) {
-			System.out.println();
+			sb.delete(0, sb.length());
 			for (int j = 0; j < W; j++) {
-				System.out.print(m[i][j] + " ");
-
+				sb.append(m[i][j] + " ");
 			}
+			logger.info(sb.toString());
 		}
 
 	}

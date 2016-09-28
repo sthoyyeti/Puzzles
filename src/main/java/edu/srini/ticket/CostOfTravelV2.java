@@ -6,6 +6,9 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * @author sri9cob
  * The cost calculation goes like following:
@@ -17,6 +20,7 @@ import java.util.List;
  *
  */
 public class CostOfTravelV2 {
+	private static Logger logger = LoggerFactory.getLogger(CostOfTravelV2.class);
 	List<Integer> daysInSequence;
 	static enum Cost { DAY(2), WEEK(7), MONTH(25);
 		int cost;
@@ -39,7 +43,7 @@ public class CostOfTravelV2 {
 		// 17, 19, 23, 27, 29, 30)); 
 		//days.addAll(Arrays.asList(1,3,6,9,12,15,18,21,24,27,30)); 1,3,5,7,9,11,13,15,17,19,21,23,25,27,29
 		days.addAll(Arrays.asList(1,3,5,7,9,11,13,15,17,19,21,23,25,27,29));
-		System.out.println(new CostOfTravelV2().calculateMonthlyTicketCost(days));
+		logger.info("" + new CostOfTravelV2().calculateMonthlyTicketCost(days));
 	}
 
 	public int calculateMonthlyTicketCost(List<Integer> days) {
